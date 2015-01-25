@@ -24,7 +24,8 @@ else
 fi
 
 echo '-----> Installing modules from install_modules'
-cpanm $1/$MODULE/ 2>&1 < $BUILD_DIR/install_modules | indent
+cd $BUILD_DIR
+cpanm 2>&1 < $BUILD_DIR/install_modules | indent
 
 if [ $WHATBOT_CONFIG ]; then
     if ! [ -d $BUILD_DIR/conf ]; then
@@ -32,4 +33,4 @@ if [ $WHATBOT_CONFIG ]; then
     fi
     '-----> Writing conf file to conf/whatbot.conf'
     echo $WHATBOT_CONFIG > $BUILD_DIR/conf/whatbot.conf
-done
+fi
