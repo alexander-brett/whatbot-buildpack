@@ -9,7 +9,7 @@ ENV_DIR=$3
 PATH="$CACHE_DIR/local/bin:$PATH"
 
 export PERL5LIB="$CACHE_DIR/local/lib/perl5"
-export PERL_CPANM_OPT="--verbose -l $CACHE_DIR/local"
+export PERL_CPANM_OPT="--verbose --notest -l $CACHE_DIR/local"
 
 indent() {
     sed -u 's/^/       /'
