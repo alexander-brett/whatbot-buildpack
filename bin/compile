@@ -26,8 +26,7 @@ fi
 echo '-----> Installing modules from install_modules'
 cpanm $1/$MODULE/ 2>&1 < $BUILD_DIR/install_modules | indent
 
-if [ $WHATBOT_CONFIG ]
-do
+if [ $WHATBOT_CONFIG ]; then
     if ! [ -d $BUILD_DIR/conf ]; then
 	mkdir $BUILD_DIR/conf
     fi
