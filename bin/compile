@@ -30,10 +30,6 @@ if ! [ -d $BUILD_DIR/conf ]; then
     mkdir $BUILD_DIR/conf
 fi
 
-echo '-----> Writing conf file to conf/whatbot.conf'
-echo $WHATBOT_CONFIG > $BUILD_DIR/conf/whatbot.conf
-
-
 if [ -d $BUILD_DIR/local ]; then
     echo '-----> Caching modules'
     rm -rf $CACHE_DIR/local
