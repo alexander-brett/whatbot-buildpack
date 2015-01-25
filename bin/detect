@@ -1,6 +1,6 @@
 #!/bin/sh
 
-if [ -d $1/Whatbot ]
+if [ -d $1/Whatbot ]; then
  echo "Perl - Whatbot";
  exit 0;
 else
