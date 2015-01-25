@@ -15,13 +15,8 @@ indent() {
     sed -u 's/^/       /'
 }
 
-if ! [ -e $CACHE_DIR/local/bin/cpanm ]; then
-    echo "-----> Bootstrapping cpanm"
-    curl -L --silent https://raw.github.com/miyagawa/cpanminus/master/cpanm | perl - App::cpanminus 2>&1 | indent
-else
-    echo "-----> Upgrading cpanm"
-    cpanm --self-upgrade | indent
-fi
+echo "-----> Bootstrapping cpanm"
+curl -L --silent https://raw.github.com/miyagawa/cpanminus/master/cpanm | perl - App::cpanminus 2>&1 | indent
 
 echo '-----> Installing modules from install_modules'
 cd $BUILD_DIR
