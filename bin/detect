@@ -1,0 +1,8 @@
+#!/bin/sh
+
+if [ -d $1/Whatbot ]
+ echo "Perl - Whatbot";
+ exit 0;
+else
+ exit 1;
+fi

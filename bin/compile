@@ -1,0 +1,36 @@
+#!/bin/sh
+
+set -e
+
+BUILD_DIR=$1
+CACHE_DIR=$2
+ENV_DIR=$3
+
+PATH="$CACHE_DIR/local/bin:$PATH"
+
+export PERL5LIB="$CACHE_DIR/local/lib/perl5"
+export PERL_CPANM_OPT="--quiet"
+
+indent() {
+    sed -u 's/^/       /'
+}
+
+if ! [ -e $CACHE_DIR/local/bin/cpanm ]; then
+    echo "-----> Bootstrapping cpanm"
+    curl -L --silent https://raw.github.com/miyagawa/cpanminus/master/cpanm | perl - App::cpanminus 2>&1 | indent
+else
+    echo "-----> Upgrading cpanm"
+    cpanm --self-upgrade | indent
+fi
+
+echo '-----> Installing modules from install_modules'
+cpanm $1/$MODULE/ 2>&1 < $BUILD_DIR/install_modules | indent
+
+if [ $WHATBOT_CONFIG ]
+do
+    if ! [ -d $BUILD_DIR/conf ]; then
+	mkdir $BUILD_DIR/conf
+    fi
+    '-----> Writing conf file to conf/whatbot.conf'
+    echo $WHATBOT_CONFIG > $BUILD_DIR/conf/whatbot.conf
+done
